@@ -61,7 +61,12 @@ def main():
 
 	# Building out the predication page
 	if selection == "Prediction":
-		st.info("Prediction with magic machine learning models")
+		st.info("Prediction with machine learning models")
+        st.markdown("A machine learning model is used to classify text about climate change according to three categories.\n
+                    -1: Anti, not believing in man-made climate change\n
+                    0: Neutral, neither supports nor refutes the belief of man-made climate change\n
+                    1: Pro, supports the belief of man-made climate change\n
+                    2: News, links to factual news about climate change")
 		# Creating a text box for user input
 		tweet_text = st.text_area("What's your opinion on climate change?","Type here")
 
