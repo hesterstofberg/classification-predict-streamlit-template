@@ -63,7 +63,7 @@ def main():
 	if selection == "Prediction":
 		st.info("Prediction with machine learning models")
 		st.markdown("A machine learning model is used to classify tweets about climate change according to three categories.")
-		st.write(pd.DataFrame({'Category': [-1, 0, 1, 2],'Description': ['Anti: this tweet does not believe in man-made climate change', 'Neutral: this tweet neither supports nor refutes the belief of man-made climate change', 'Pro: this tweet supports the belief of man-made climate change', 'News: this tweet links to factual news about climate change']}))
+		st.table(pd.DataFrame({'Category': [-1, 0, 1, 2],'Description': ['Anti: this tweet does not believe in man-made climate change', 'Neutral: this tweet neither supports nor refutes the belief of man-made climate change', 'Pro: this tweet supports the belief of man-made climate change', 'News: this tweet links to factual news about climate change']}))
 		# Creating a text box for user input
 		tweet_text = st.text_area("What's your opinion on climate change?","Type here")
 
