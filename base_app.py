@@ -53,7 +53,7 @@ def main():
 	if selection == "Information":
 		st.info("General Information")
 		# You can read a markdown file from supporting resources folder
-		st.markdown("Some information here")
+		st.markdown("Here you will find the raw data that was used to train the model, in order to make some predictions.")
 
 		st.subheader("Raw Twitter data and label")
 		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
@@ -61,11 +61,11 @@ def main():
 
 	# Building out the predication page
 	if selection == "Prediction":
-		st.info("Prediction with ML Models")
+		st.info("Prediction with magic machine learning models")
 		# Creating a text box for user input
-		tweet_text = st.text_area("Enter Text","Type Here")
+		tweet_text = st.text_area("What's your opinion on climate change?","Type here")
 
-		if st.button("Classify"):
+		if st.button("Analyse my opinion"):
 			# Transforming user input with vectorizer
 			vect_text = tweet_cv.transform([tweet_text]).toarray()
 			# Load your .pkl file with the model of your choice + make predictions
@@ -76,7 +76,7 @@ def main():
 			# When model has successfully run, will print prediction
 			# You can use a dictionary or similar structure to make this output
 			# more human interpretable.
-			st.success("Text Categorized as: {}".format(prediction))
+			st.success("Your opinion has been categorized by our amazing machine learnign model as: {}".format(prediction))
 
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
