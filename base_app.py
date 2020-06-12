@@ -57,7 +57,7 @@ def main():
 
 		st.subheader("Raw Twitter data and label")
 		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
-			st.write(raw[['sentiment', 'message']]) # will write the df to the page
+			st.table(raw[['sentiment', 'message']]) # will write the df to the page
 
 	# Building out the predication page
 	if selection == "Prediction":
@@ -65,7 +65,7 @@ def main():
 		st.markdown("A machine learning model is used to classify tweets about climate change according to three categories.")
 		st.table(pd.DataFrame({'Category': [-1, 0, 1, 2],'Description': ['Anti: this tweet does not believe in man-made climate change', 'Neutral: this tweet neither supports nor refutes the belief of man-made climate change', 'Pro: this tweet supports the belief of man-made climate change', 'News: this tweet links to factual news about climate change']}))
 		# Creating a text box for user input
-		tweet_text = st.text_area("What's your opinion on climate change?","Type here")
+		tweet_text = st.text_area("What's your opinion on climate change?",'')
 
 		if st.button("Analyse my opinion"):
 			# Transforming user input with vectorizer
@@ -78,7 +78,7 @@ def main():
 			# When model has successfully run, will print prediction
 			# You can use a dictionary or similar structure to make this output
 			# more human interpretable.
-			st.success("Your opinion has been categorized by our amazing machine learnign model as: {}".format(prediction))
+			st.success("Your opinion has been categorized by the model as: {}".format(prediction))
 
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
