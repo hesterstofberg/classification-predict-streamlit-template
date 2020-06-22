@@ -26,7 +26,7 @@ import streamlit as st
 import joblib,os
 # for displaying images
 from PIL import Image
-wordcloud = Image.open(joint_cloud.png)
+wordcloud = Image.open('joint_cloud.png')
 
 # Data dependencies
 import pandas as pd
@@ -72,7 +72,7 @@ def main():
 		st.info("Exploratory Data Analysis")
 		st.markdown("below you will see the wordclouds")
 		# here we can add graphs and word clouds and such        
-		# st.image(wordcloud, caption='Wordcloud from the training data', use_column_width=True)
+		st.image(wordcloud, caption='Wordcloud from the training data', use_column_width=True)
 
 
 	# Building out the predication page
