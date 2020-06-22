@@ -70,9 +70,10 @@ def main():
 	# Building out the 'EDA' page   
 	if selection == "EDA":
 		st.info("Exploratory Data Analysis")
-        st.markdown("below you will see the word clouds")
-        st.image(wordcloud, caption='Wordcloud from the training data', use_column_width=True)
-		# here we can add graphs and word clouds and such
+		st.markdown("below you will see the wordclouds")
+		# here we can add graphs and word clouds and such        
+		# st.image(wordcloud, caption='Wordcloud from the training data', use_column_width=True)
+
 
 	# Building out the predication page
 	if selection == "Prediction":
