@@ -46,18 +46,27 @@ def main():
 
 	# Creating sidebar with selection box -
 	# you can create multiple pages this way
-	options = ["Prediction", "Information"]
+	options = ["Background", "EDA", "Prediction", "Information"]
 	selection = st.sidebar.selectbox("Choose Option", options)
 
-	# Building out the "Information" page
+	# Building out the "Raw data" page
 	if selection == "Information":
-		st.info("General Information")
+		st.info("Data used for training the model")
 		# You can read a markdown file from supporting resources folder
 		st.markdown("Here you will find the raw data that was used to train the model, in order to make some predictions.")
 
 		st.subheader("Raw Twitter data and label")
 		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
 			st.write(raw[['sentiment', 'message']]) # will write the df to the page
+            
+    # Building out the 'Background' page
+	if selection == "Background":
+		st.info("How it works")
+		st.markdown("This web app requires the user to input text (ideally a tweet relating to climate change), and will classify it according to whether or not they believe in climate change. You can have a look at word clouds and other general EDA on the 'EDA' page, and make your predictions on the 'Prediction' page that you can navigate to in the sidebar. In the 'Information' page you will find information about the data source and a brief data description.")
+        
+        
+	if selection == "EDA":
+		st.info("Exploratory Data Analysis")
 
 	# Building out the predication page
 	if selection == "Prediction":
