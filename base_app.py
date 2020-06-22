@@ -27,7 +27,7 @@ import joblib,os
 # for displaying images
 from PIL import Image
 wordcloud = Image.open('joint_cloud.png')
-wordcount = Image.open('wordcount_bar.png)
+wordcount = Image.open('wordcount_bar.png')
 
 # Data dependencies
 import pandas as pd
@@ -66,7 +66,7 @@ def main():
 	# Building out the 'Background' page
 	if selection == "Background":
 		st.info("How it works")
-		st.markdown("This web app requires the user to input text (ideally a tweet relating to climate change), and will classify it according to whether or not they believe in climate change. You can have a look at word clouds and other general EDA on the 'EDA' page, and make your predictions on the 'Prediction' page that you can navigate to in the sidebar. In the 'Information' page you will find information about the data source and a brief data description.")
+		st.markdown("This web app requires the user to input text (ideally a tweet relating to climate change), and will classify it according to whether or not they believe in climate change. You can have a look at word clouds and other general exloratory data analysis on the 'EDA' page, and make your predictions on the 'Prediction' page that you can navigate to in the sidebar. In the 'Information' page you will find information about the data source and a brief data description.")
         
 	# Building out the 'EDA' page   
 	if selection == "EDA":
