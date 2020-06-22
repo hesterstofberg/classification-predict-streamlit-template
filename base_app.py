@@ -59,14 +59,15 @@ def main():
 		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
 			st.write(raw[['sentiment', 'message']]) # will write the df to the page
             
-    # Building out the 'Background' page
+	# Building out the 'Background' page
 	if selection == "Background":
 		st.info("How it works")
 		st.markdown("This web app requires the user to input text (ideally a tweet relating to climate change), and will classify it according to whether or not they believe in climate change. You can have a look at word clouds and other general EDA on the 'EDA' page, and make your predictions on the 'Prediction' page that you can navigate to in the sidebar. In the 'Information' page you will find information about the data source and a brief data description.")
         
-        
+	# Building out the 'EDA' page   
 	if selection == "EDA":
 		st.info("Exploratory Data Analysis")
+		# here we can add graphs and word clouds and such
 
 	# Building out the predication page
 	if selection == "Prediction":
@@ -75,6 +76,7 @@ def main():
 		st.table(pd.DataFrame({'Category': [-1, 0, 1, 2],'Description': ['Anti: this tweet does not believe in man-made climate change', 'Neutral: this tweet neither supports nor refutes the belief of man-made climate change', 'Pro: this tweet supports the belief of man-made climate change', 'News: this tweet links to factual news about climate change']}))
 		# Creating a text box for user input
 		tweet_text = st.text_area("What's your opinion on climate change?",'')
+		# add function to clean text
 
 		if st.button("Analyse my opinion"):
 			# Transforming user input with vectorizer
