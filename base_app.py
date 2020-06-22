@@ -24,6 +24,9 @@
 # Streamlit dependencies
 import streamlit as st
 import joblib,os
+# for displaying images
+from PIL import Image
+wordcloud = Image.open(joint_cloud.png)
 
 # Data dependencies
 import pandas as pd
@@ -67,6 +70,8 @@ def main():
 	# Building out the 'EDA' page   
 	if selection == "EDA":
 		st.info("Exploratory Data Analysis")
+        st.markdown("below you will see the word clouds")
+        st.image(wordcloud, caption='Wordcloud from the training data', use_column_width=True)
 		# here we can add graphs and word clouds and such
 
 	# Building out the predication page
