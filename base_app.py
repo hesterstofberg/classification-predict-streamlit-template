@@ -27,6 +27,7 @@ import joblib,os
 # for displaying images
 from PIL import Image
 wordcloud = Image.open('joint_cloud.png')
+wordcount = Image.open('wordcount_bar.png)
 
 # Data dependencies
 import pandas as pd
@@ -69,10 +70,18 @@ def main():
         
 	# Building out the 'EDA' page   
 	if selection == "EDA":
-		st.info("Exploratory Data Analysis")
+		st.info("Word count analysis")
 		st.markdown("below you will see the wordclouds")
 		# here we can add graphs and word clouds and such        
-		st.image(wordcloud, caption='Wordcloud from the training data', use_column_width=True)
+		st.image(wordcloud, caption='Wordcloud from the training data.', use_column_width=True)
+		st.info("Word frequency analysis")
+		# write something here
+		st.info("Word count analysis")
+		# write something here
+		st.image(wordcount, caption='Top 20 most frequently used words.', use_column_width=True)
+		st.info("Hashtags for each sentiment")
+		# write something here
+		st.info("Average length of each sentiment")
 
 
 	# Building out the predication page
