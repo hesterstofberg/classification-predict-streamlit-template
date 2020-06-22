@@ -24,6 +24,7 @@
 # Streamlit dependencies
 import streamlit as st
 import joblib,os
+
 # for displaying images
 from PIL import Image
 wordcloud = Image.open('joint_cloud.png')
@@ -71,17 +72,16 @@ def main():
 	# Building out the 'EDA' page   
 	if selection == "EDA":
 		st.info("Word count analysis")
-		st.markdown("below you will see the wordclouds")
+		st.markdown("Below you will see the wordclouds for each sentiment.")
 		# here we can add graphs and word clouds and such        
 		st.image(wordcloud, caption='Wordcloud from the training data.', use_column_width=True)
 		st.info("Word frequency analysis")
-		# write something here
-		st.info("Word count analysis")
-		# write something here
+		st.markdown("add description")
 		st.image(wordcount, caption='Top 20 most frequently used words.', use_column_width=True)
 		st.info("Hashtags for each sentiment")
-		# write something here
+		st.markdown("add description")
 		st.info("Average length of each sentiment")
+		st.markdown("add description")
 
 
 	# Building out the predication page
@@ -92,6 +92,11 @@ def main():
 		# Creating a text box for user input
 		tweet_text = st.text_area("What's your opinion on climate change?",'')
 		# add function to clean text
+        
+        # give model choice
+		modelChoice = st.radio("Choose a model", ("LinearSVC", "Naive Bayes", "Logistic"))
+		# remove st.button("Analyse my opinion")
+		# instead if modelChoice == '': .....
 
 		if st.button("Analyse my opinion"):
 			# Transforming user input with vectorizer
