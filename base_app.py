@@ -36,6 +36,7 @@ import re
 import string
 import nltk
 from nltk.corpus import stopwords
+stop_words = set(stopwords.words("english"))
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import words
 
@@ -76,7 +77,7 @@ def cleaning (text):
 	text = [lemmatizer.lemmatize(token) for token in text.split(" ")]
 	text = [lemmatizer.lemmatize(token, "v") for token in text]
 
-	text = [word for word in text if not word in stopwords]
+	text = [word for word in text if not word in stop_words]
 	text = " ".join(text)
 	text = re.sub('ãââ', '', text)
     
