@@ -32,6 +32,12 @@ wordcount = Image.open('wordcount_bar.png')
 
 # Data dependencies
 import pandas as pd
+import re
+import string
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from nltk.corpus import words
 
 # Vectorizer
 news_vectorizer = open("resources/tfidfvect.pkl","rb")
@@ -39,6 +45,42 @@ tweet_cv = joblib.load(news_vectorizer) # loading your vectorizer from the pkl f
 
 # Load your raw data
 raw = pd.read_csv("resources/train.csv")
+
+# functions for cleaning message
+def clean_tweets(message):
+    
+	#change all words into lower case
+	message = message.lower()
+    
+	#replace website links
+	url = r'http[s]?://(?:[A-Za-z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9A-Fa-f][0-9A-Fa-f]))+'
+	web = 'url-web'
+	message = re.sub(url, web, message)
+    
+	#removing puntuation and digits
+	message  = "".join([char for char in message if char not in string.punctuation])
+	message = re.sub('[0-9]+', '', message)
+    
+	#removing stopwords
+	nltk_stopword = nltk.corpus.stopwords.words('english')
+	message = ' '.join([item for item in message.split() if item not in nltk_stopword])
+    
+	return message
+
+def cleaning (text):
+    
+	text = re.sub(r'[^\w\s]','',text, re.UNICODE)
+	text = text.lower()
+
+	lemmatizer = WordNetLemmatizer()
+	text = [lemmatizer.lemmatize(token) for token in text.split(" ")]
+	text = [lemmatizer.lemmatize(token, "v") for token in text]
+
+	text = [word for word in text if not word in stopwords]
+	text = " ".join(text)
+	text = re.sub('ãââ', '', text)
+    
+	return text
 
 # The main function where we will build the actual app
 def main():
@@ -71,17 +113,19 @@ def main():
         
 	# Building out the 'EDA' page   
 	if selection == "EDA":
-		st.info("Word count analysis")
-		st.markdown("Below you will see the wordclouds for each sentiment.")
-		# here we can add graphs and word clouds and such        
-		st.image(wordcloud, caption='Wordcloud from the training data.', use_column_width=True)
-		st.info("Word frequency analysis")
-		st.markdown("add description")
-		st.image(wordcount, caption='Top 20 most frequently used words.', use_column_width=True)
-		st.info("Hashtags for each sentiment")
-		st.markdown("add description")
-		st.info("Average length of each sentiment")
-		st.markdown("add description")
+		st.info("Exploratory Data Analysis")   
+		st.markdown("Analysis of the training data is an important step in understanding the data. A variety of analysis has been done on the training data. Select an option for more information.")
+		if st.checkbox('Word count analysis'):
+			st.markdown("Below you will see the wordclouds for each sentiment.")
+			# here we can add graphs and word clouds and such        
+			st.image(wordcloud, caption='Wordcloud from the training data.', use_column_width=True)
+		if st.checkbox('Word frequency analysis'):
+			st.markdown("add description")
+			st.image(wordcount, caption='Top 20 most frequently used words.', use_column_width=True)
+		if st.checkbox('Hashtags for each sentiment'):
+			st.markdown("add description")
+		if st.checkbox('Average length of each sentiment'):
+			st.markdown("add description")
 
 
 	# Building out the predication page
@@ -91,21 +135,24 @@ def main():
 		st.table(pd.DataFrame({'Category': [-1, 0, 1, 2],'Description': ['Anti: this tweet does not believe in man-made climate change', 'Neutral: this tweet neither supports nor refutes the belief of man-made climate change', 'Pro: this tweet supports the belief of man-made climate change', 'News: this tweet links to factual news about climate change']}))
 		# Creating a text box for user input
 		tweet_text = st.text_area("What's your opinion on climate change?",'')
-		# add function to clean text
+
+        # add function to clean text
+		tweet_text = clean_tweets(tweet_text)
+		tweet_text = cleaning(tweet_text)
         
         # give model choice
 		modelChoice = st.radio("Choose a model", ("LinearSVC", "Naive Bayes", "Logistic"))
 		# remove st.button("Analyse my opinion")
 		# instead if modelChoice == '': .....
 
-		if st.button("Analyse my opinion"):
+		if modelChoice == 'LinearSVC':
 			# Transforming user input with vectorizer
 			vect_text = tweet_cv.transform([tweet_text]).toarray()
 			# Load your .pkl file with the model of your choice + make predictions
 			# Try loading in multiple models to give the user a choice
 			predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
 			prediction = predictor.predict(vect_text)
-
+            
 			# When model has successfully run, will print prediction
 			# You can use a dictionary or similar structure to make this output
 			# more human interpretable.
