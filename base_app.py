@@ -40,6 +40,13 @@ stop_words = set(stopwords.words("english"))
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import words
 
+# Add colors
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+local_css("style.css")
+
 # Vectorizer
 #news_vectorizer = open("resources/tfidfvect.pkl","rb")
 #tweet_cv = joblib.load(news_vectorizer) # loading your vectorizer from the pkl file
