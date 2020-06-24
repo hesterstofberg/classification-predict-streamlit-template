@@ -41,8 +41,8 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import words
 
 # Vectorizer
-news_vectorizer = open("resources/tfidfvect.pkl","rb")
-tweet_cv = joblib.load(news_vectorizer) # loading your vectorizer from the pkl file
+#news_vectorizer = open("resources/tfidfvect.pkl","rb")
+#tweet_cv = joblib.load(news_vectorizer) # loading your vectorizer from the pkl file
 
 # Load your raw data
 raw = pd.read_csv("resources/train.csv")
@@ -77,7 +77,7 @@ def cleaning (text):
 	text = [lemmatizer.lemmatize(token) for token in text.split(" ")]
 	text = [lemmatizer.lemmatize(token, "v") for token in text]
 
-	text = [word for word in text if not word in stop_words]
+	#text = [word for word in text if not word in stop_words]
 	text = " ".join(text)
 	text = re.sub('ãââ', '', text)
     
@@ -137,27 +137,47 @@ def main():
 		# Creating a text box for user input
 		tweet_text = st.text_area("What's your opinion on climate change?",'')
 
-        # add function to clean text
+        # cleaning text
 		tweet_text = clean_tweets(tweet_text)
 		tweet_text = cleaning(tweet_text)
+		tweet_text = [tweet_text]
         
         # give model choice
-		modelChoice = st.radio("Choose a model", ("LinearSVC", "Naive Bayes", "Logistic"))
-		# remove st.button("Analyse my opinion")
-		# instead if modelChoice == '': .....
+		modelChoice = st.radio("Choose a model", ("Linear SVC", "Logistic", "Naive Bayes"))         
 
-		if modelChoice == 'LinearSVC':
+		if modelChoice == 'Linear SVC':
 			# Transforming user input with vectorizer
-			vect_text = tweet_cv.transform([tweet_text]).toarray()
+			#vect_text = tweet_cv.transform([tweet_text]).toarray()
 			# Load your .pkl file with the model of your choice + make predictions
 			# Try loading in multiple models to give the user a choice
-			predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
-			prediction = predictor.predict(vect_text)
+			predictor = joblib.load(open(os.path.join("resources/LN_SVC_model.pkl"),"rb"))
+			prediction = predictor.predict(tweet_text)
             
 			# When model has successfully run, will print prediction
-			# You can use a dictionary or similar structure to make this output
-			# more human interpretable.
 			st.success("Your opinion has been categorized by the model as: {}".format(prediction))
+
+            
+		if modelChoice == 'Logistic':
+			# Transforming user input with vectorizer
+			#vect_text = tweet_cv.transform([tweet_text]).toarray()
+			# Load your .pkl file with the model of your choice + make predictions
+			# Try loading in multiple models to give the user a choice
+			predictor = joblib.load(open(os.path.join("resources/LR_model.pkl"),"rb"))
+			prediction = predictor.predict(tweet_text)
+            
+			# When model has successfully run, will print prediction
+			st.success("Your opinion has been categorized by the model as: {}".format(prediction))
+            
+		if modelChoice == 'Naive Bayes':
+			# Transforming user input with vectorizer
+			#vect_text = tweet_cv.transform([tweet_text]).toarray()
+			# Load your .pkl file with the model of your choice + make predictions
+			# Try loading in multiple models to give the user a choice
+			predictor = joblib.load(open(os.path.join("resources/NB_model.pkl"),"rb"))
+			prediction = predictor.predict(tweet_text)
+            
+			# When model has successfully run, will print prediction
+			st.success("Your opinion has been categorized by the model as: {}".format(prediction))            
 
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
