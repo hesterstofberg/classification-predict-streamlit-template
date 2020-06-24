@@ -42,20 +42,18 @@ from nltk.corpus import words
 
 # Add colors
 def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+	with open(file_name) as f:
+		st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 local_css("style.css")
-
-# Vectorizer
-#news_vectorizer = open("resources/tfidfvect.pkl","rb")
-#tweet_cv = joblib.load(news_vectorizer) # loading your vectorizer from the pkl file
 
 # Load your raw data
 raw = pd.read_csv("resources/train.csv")
 
 # functions for cleaning message
 def clean_tweets(message):
+	""" We need a docstring here
+	"""
     
 	#change all words into lower case
 	message = message.lower()
@@ -76,6 +74,8 @@ def clean_tweets(message):
 	return message
 
 def cleaning (text):
+	""" We need a docstring here
+	"""
     
 	text = re.sub(r'[^\w\s]','',text, re.UNICODE)
 	text = text.lower()
@@ -102,6 +102,7 @@ def main():
 	# Creating sidebar with selection box -
 	# you can create multiple pages this way
 	options = ["Background", "EDA", "Prediction", "Information"]
+	st.sidebar.subheader("Navigation")
 	selection = st.sidebar.selectbox("Choose Option", options)
 
 	# Building out the "Raw data" page
@@ -118,6 +119,7 @@ def main():
 	if selection == "Background":
 		st.info("How it works")
 		st.markdown("This web app requires the user to input text (ideally a tweet relating to climate change), and will classify it according to whether or not they believe in climate change. You can have a look at word clouds and other general exloratory data analysis on the 'EDA' page, and make your predictions on the 'Prediction' page that you can navigate to in the sidebar. In the 'Information' page you will find information about the data source and a brief data description.")
+		st.markdown("Maybe add some info on how model performance is evaluated? f1 scores and such")
         
 	# Building out the 'EDA' page   
 	if selection == "EDA":
@@ -135,12 +137,12 @@ def main():
 		if st.checkbox('Average length of each sentiment'):
 			st.markdown("add description")
 
-
 	# Building out the predication page
 	if selection == "Prediction":
 		st.info("Prediction with machine learning models")
-		st.markdown("A machine learning model is used to classify tweets about climate change according to three categories.")
+		st.markdown("A machine learning model is used to classify tweets about climate change according to three categories. The categories are described below.")
 		st.table(pd.DataFrame({'Category': [-1, 0, 1, 2],'Description': ['Anti: this tweet does not believe in man-made climate change', 'Neutral: this tweet neither supports nor refutes the belief of man-made climate change', 'Pro: this tweet supports the belief of man-made climate change', 'News: this tweet links to factual news about climate change']}))
+		st.markdown("Enter your opinion on climate change below, then choose what model you would like to use to classify your opinion.")
 		# Creating a text box for user input
 		tweet_text = st.text_area("What's your opinion on climate change?",'')
 
@@ -162,7 +164,7 @@ def main():
             
 			# When model has successfully run, will print prediction
 			st.success("Your opinion has been categorized by the model as: {}".format(prediction))
-
+			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")
             
 		if modelChoice == 'Logistic':
 			# Transforming user input with vectorizer
@@ -174,6 +176,7 @@ def main():
             
 			# When model has successfully run, will print prediction
 			st.success("Your opinion has been categorized by the model as: {}".format(prediction))
+			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")        
             
 		if modelChoice == 'Naive Bayes':
 			# Transforming user input with vectorizer
@@ -184,7 +187,8 @@ def main():
 			prediction = predictor.predict(tweet_text)
             
 			# When model has successfully run, will print prediction
-			st.success("Your opinion has been categorized by the model as: {}".format(prediction))            
+			st.success("Your opinion has been categorized by the model as: {}".format(prediction))
+			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")            
 
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
