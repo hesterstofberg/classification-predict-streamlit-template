@@ -127,22 +127,16 @@ def main():
 
 	# Creating sidebar with selection box -
 	# you can create multiple pages this way
-	options = ["Background", "EDA", "Prediction", "Information"]
+	options = ["Home","How it works", "EDA", "Prediction", "Information", "About us"]
 	st.sidebar.subheader("Navigation")
 	selection = st.sidebar.selectbox("Choose Option", options)
 
-	# Building out the "Raw data" page
-	if selection == "Information":
-		st.markdown("Data used for training the model")
-		# You can read a markdown file from supporting resources folder
-		st.markdown("Here you will find the raw data that was used to train the model, in order to make some predictions.")
-
-		st.subheader("Raw Twitter data and label")
-		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
-			st.write(raw[['sentiment', 'message']]) # will write the df to the page
+	# Building the home page    
+	if selection == "Home":
+		st.markdown("Welcome!")
             
 	# Building out the 'Background' page
-	if selection == "Background":
+	if selection == "How it works":
 		st.markdown("How it works")
 		st.markdown("This web app requires the user to input text (ideally a tweet relating to climate change), and will classify it according to whether or not they believe in climate change. You can have a look at word clouds and other general exloratory data analysis on the 'EDA' page, and make your predictions on the 'Prediction' page that you can navigate to in the sidebar. In the 'Information' page you will find information about the data source and a brief data description.")
 		st.markdown("Maybe add some info on how model performance is evaluated? f1 scores and such")
@@ -234,8 +228,28 @@ def main():
 			# When model has successfully run, will print prediction
 			st.success("Your opinion has been categorized by the model as: {}".format(prediction))
 			statement(prediction)            
-			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")            
+			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")
 
+	# Building out the "Raw data" page
+	if selection == "Information":
+		st.markdown("Data used for training the model")
+		# You can read a markdown file from supporting resources folder
+		st.markdown("Here you will find the raw data that was used to train the model, in order to make some predictions.")
+
+		st.subheader("Raw Twitter data and label")
+		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
+			st.write(raw[['sentiment', 'message']]) # will write the df to the page            
+            
+	# Building the "About us" age            
+	if selection == "About us":
+		st.markdown("Meet the team")
+		st.markdown("We are six students at EXPLORE Data Science Academy, nice to meet you!")
+		st.markdown("Anna Modjadji")
+		st.markdown("Buhle Ntushelo")
+		st.markdown("Hester Stofberg. She's an aspiring paint-by-numbers painter, plant enthusiast, and lover of all thing feta.")        
+		st.markdown("Olwethu Mkhuhlane")
+		st.markdown("Tony Masombuka")
+        
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
 	main()
