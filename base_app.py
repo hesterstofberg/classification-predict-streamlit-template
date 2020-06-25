@@ -27,8 +27,13 @@ import joblib,os
 
 # for displaying images
 from PIL import Image
-wordcloud = Image.open('joint_cloud.png')
-wordcount = Image.open('wordcount_bar.png')
+unbalancedData = Image.open('resources/imgs/unbalanced.png')
+anti_hashtags = Image.open('resources/imgs/anti_hashtags.png')
+neutral_hashtags = Image.open('resources/imgs/neutral_hashtags.png')
+news_hashtags = Image.open('resources/imgs/news_hashtags.png')
+pro_hashtags = Image.open('resources/imgs/pro_hashtags.png')
+wordcloud = Image.open('resources/imgs/joint_cloud.png')
+wordcount = Image.open('resources/imgs/wordcount_bar.png')
 
 # Data dependencies
 import pandas as pd
@@ -38,7 +43,7 @@ import nltk
 nltk.download('stopwords')
 nltk.download('wordnet')
 from nltk.corpus import stopwords
-stop_words = set(stopwords.words("english"))
+#stop_words = set(stopwords.words("english"))
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import words
 
@@ -89,6 +94,9 @@ def cleaning (text):
 	text = re.sub('ãââ', '', text)
     
 	return text
+
+# creating dataframe for description of sentiments
+df = pd.DataFrame({'Category': [-1, 0, 1, 2],'Description': ['Anti: this tweet does not believe in man-made climate change', 'Neutral: this tweet neither supports nor refutes the belief of man-made climate change', 'Pro: this tweet supports the belief of man-made climate change', 'News: this tweet links to factual news about climate change']})
 
 # Function to give statement of prediction
 def statement(sentiment):
@@ -143,7 +151,10 @@ def main():
 	if selection == "EDA":
 		st.markdown("Exploratory Data Analysis")   
 		st.markdown("Analysis of the training data is an important step in understanding the data. A variety of analysis has been done on the training data. Select an option for more information.")
-		# Building checkbox to give user options        
+		# Building checkbox to give user options
+		if st.checkbox('Sentiment count analysis'):
+			st.markdown("The sentiment count for the training data is shown below")
+			st.image(unbalancedData, caption='The training data is not evenly balanced.')
 		if st.checkbox('Word count analysis'):
 			st.markdown("Below you will see the wordclouds for each sentiment.")        
 			st.image(wordcloud, caption='Wordcloud from the training data.', use_column_width=True)
@@ -151,7 +162,30 @@ def main():
 			st.markdown("add description")
 			st.image(wordcount, caption='Top 20 most frequently used words.', use_column_width=True)
 		if st.checkbox('Hashtags for each sentiment'):
-			st.markdown("add description")
+        
+        # Give user the choice of sentiment
+			sentimentChoice = st.radio("Choose a sentiment", ("Anti", "Neutral", "Pro", "Factual/news"))
+            
+			if sentimentChoice == "Anti":
+				st.markdown("add description")
+				st.image(anti_hashtags, caption='Most frequently used hashtags for tweets with an anti climate change sentiment.')
+				st.markdown("Give conclusions on graph")
+            
+			if sentimentChoice == "Neutral":            
+				st.markdown("add description")
+				st.image(neutral_hashtags, caption='Most frequently used hashtags for tweets with a neutral sentiment.')            
+				st.markdown("Give conclusions on graph")
+            
+			if sentimentChoice == "Pro":            
+				st.markdown("add description")
+				st.image(pro_hashtags, caption='Most frequently used hashtags for tweets with a pro climate change sentiment.')
+				st.markdown("Give conclusions on graph")
+            
+			if sentimentChoice == "Factual/news":            
+				st.markdown("add description")  
+				st.image(news_hashtags, caption='Most frequently used hashtags for tweets with a factual/news sentiment.')
+				st.markdown("Give conclusions on graph")    
+            
 		if st.checkbox('Average length of each sentiment'):
 			st.markdown("add description")
 
@@ -159,7 +193,7 @@ def main():
 	if selection == "Prediction":
 		st.markdown("Prediction with machine learning models")
 		st.markdown("A machine learning model is used to classify tweets about climate change according to three categories. The categories are described below.")
-		st.table(pd.DataFrame({'Category': [-1, 0, 1, 2],'Description': ['Anti: this tweet does not believe in man-made climate change', 'Neutral: this tweet neither supports nor refutes the belief of man-made climate change', 'Pro: this tweet supports the belief of man-made climate change', 'News: this tweet links to factual news about climate change']}))
+		st.table(df)
 		st.markdown("Enter your opinion on climate change below, then choose what model you would like to use to classify your opinion.")
 		# Creating a text box for user input
 		tweet_text = st.text_area("What's your opinion on climate change?",'')
