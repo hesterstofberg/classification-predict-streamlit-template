@@ -49,13 +49,12 @@ def local_css(file_name):
 
 local_css("style.css")
 
-# Load your raw data
+# Load raw data
 raw = pd.read_csv("resources/train.csv")
 
-# functions for cleaning message
+# Functions for cleaning text
 def clean_tweets(message):
-	""" We need a docstring here
-	"""
+	""" We need a docstring here"""
     
 	#change all words into lower case
 	message = message.lower()
@@ -75,9 +74,9 @@ def clean_tweets(message):
     
 	return message
 
+# Function for cleaning text
 def cleaning (text):
-	""" We need a docstring here
-	"""
+	""" We need a docstring here"""
     
 	text = re.sub(r'[^\w\s]','',text, re.UNICODE)
 	text = text.lower()
@@ -86,11 +85,28 @@ def cleaning (text):
 	text = [lemmatizer.lemmatize(token) for token in text.split(" ")]
 	text = [lemmatizer.lemmatize(token, "v") for token in text]
 
-	#text = [word for word in text if not word in stop_words]
 	text = " ".join(text)
 	text = re.sub('ãââ', '', text)
     
 	return text
+
+# Function to give statement of prediction
+def statement(sentiment):
+	"""This function gives a statement according to the prediction made"""
+	# Statement for 'anti' text
+	if sentiment == -1:
+		st.markdown("The selected model has determined that this text does not believe in man-made climate change")
+	# Statement for 'neutral' text      
+	if sentiment == 0:
+		st.markdown("The selected model has determined that this text neither supports nor refutes the belief of man-made climate change")
+	# Statement for 'pro' text        
+	if sentiment == 1:
+		st.markdown("The selected model has determined that this text supports the belief of man-made climate change")
+	# Statement for 'news' text        
+	if sentiment == 2:
+		st.markdown("The selected model has determined that this text links to factual news about climate change")
+        
+	return     
 
 # The main function where we will build the actual app
 def main():
@@ -127,9 +143,9 @@ def main():
 	if selection == "EDA":
 		st.markdown("Exploratory Data Analysis")   
 		st.markdown("Analysis of the training data is an important step in understanding the data. A variety of analysis has been done on the training data. Select an option for more information.")
+		# Building checkbox to give user options        
 		if st.checkbox('Word count analysis'):
-			st.markdown("Below you will see the wordclouds for each sentiment.")
-			# here we can add graphs and word clouds and such        
+			st.markdown("Below you will see the wordclouds for each sentiment.")        
 			st.image(wordcloud, caption='Wordcloud from the training data.', use_column_width=True)
 		if st.checkbox('Word frequency analysis'):
 			st.markdown("add description")
@@ -153,43 +169,37 @@ def main():
 		tweet_text = cleaning(tweet_text)
 		tweet_text = [tweet_text]
         
-        # give model choice
+        # Give user the choice of more than one model
 		modelChoice = st.radio("Choose a model", ("Linear SVC", "Logistic", "Naive Bayes"))         
 
 		if modelChoice == 'Linear SVC':
-			# Transforming user input with vectorizer
-			#vect_text = tweet_cv.transform([tweet_text]).toarray()
-			# Load your .pkl file with the model of your choice + make predictions
-			# Try loading in multiple models to give the user a choice
+			# Loading .pkl file with the model of choice + make predictions
 			predictor = joblib.load(open(os.path.join("resources/LN_SVC_model.pkl"),"rb"))
 			prediction = predictor.predict(tweet_text)
             
 			# When model has successfully run, will print prediction
 			st.success("Your opinion has been categorized by the model as: {}".format(prediction))
+			statement(prediction)
 			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")
             
 		if modelChoice == 'Logistic':
-			# Transforming user input with vectorizer
-			#vect_text = tweet_cv.transform([tweet_text]).toarray()
-			# Load your .pkl file with the model of your choice + make predictions
-			# Try loading in multiple models to give the user a choice
+			# Loading .pkl file with the model of choice + make predictions
 			predictor = joblib.load(open(os.path.join("resources/LR_model.pkl"),"rb"))
 			prediction = predictor.predict(tweet_text)
             
 			# When model has successfully run, will print prediction
 			st.success("Your opinion has been categorized by the model as: {}".format(prediction))
+			statement(prediction)            
 			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")        
-            
-		if modelChoice == 'Naive Bayes':
-			# Transforming user input with vectorizer
-			#vect_text = tweet_cv.transform([tweet_text]).toarray()
-			# Load your .pkl file with the model of your choice + make predictions
-			# Try loading in multiple models to give the user a choice
+
+		if modelChoice == 'Naive Bayes':            
+			# Loading .pkl file with the model of choice + make predictions
 			predictor = joblib.load(open(os.path.join("resources/NB_model.pkl"),"rb"))
 			prediction = predictor.predict(tweet_text)
             
 			# When model has successfully run, will print prediction
 			st.success("Your opinion has been categorized by the model as: {}".format(prediction))
+			statement(prediction)            
 			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")            
 
 # Required to let Streamlit instantiate our web app.  
