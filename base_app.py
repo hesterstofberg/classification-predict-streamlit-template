@@ -40,6 +40,13 @@ stop_words = set(stopwords.words("english"))
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import words
 
+# Add colors
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+local_css("style.css")
+
 # Load your raw data
 raw = pd.read_csv("resources/train.csv")
 
@@ -100,7 +107,7 @@ def main():
 
 	# Building out the "Raw data" page
 	if selection == "Information":
-		st.info("Data used for training the model")
+		st.markdown("Data used for training the model")
 		# You can read a markdown file from supporting resources folder
 		st.markdown("Here you will find the raw data that was used to train the model, in order to make some predictions.")
 
@@ -110,13 +117,13 @@ def main():
             
 	# Building out the 'Background' page
 	if selection == "Background":
-		st.info("How it works")
+		st.markdown("How it works")
 		st.markdown("This web app requires the user to input text (ideally a tweet relating to climate change), and will classify it according to whether or not they believe in climate change. You can have a look at word clouds and other general exloratory data analysis on the 'EDA' page, and make your predictions on the 'Prediction' page that you can navigate to in the sidebar. In the 'Information' page you will find information about the data source and a brief data description.")
 		st.markdown("Maybe add some info on how model performance is evaluated? f1 scores and such")
         
 	# Building out the 'EDA' page   
 	if selection == "EDA":
-		st.info("Exploratory Data Analysis")   
+		st.markdown("Exploratory Data Analysis")   
 		st.markdown("Analysis of the training data is an important step in understanding the data. A variety of analysis has been done on the training data. Select an option for more information.")
 		if st.checkbox('Word count analysis'):
 			st.markdown("Below you will see the wordclouds for each sentiment.")
@@ -132,7 +139,7 @@ def main():
 
 	# Building out the predication page
 	if selection == "Prediction":
-		st.info("Prediction with machine learning models")
+		st.markdown("Prediction with machine learning models")
 		st.markdown("A machine learning model is used to classify tweets about climate change according to three categories. The categories are described below.")
 		st.table(pd.DataFrame({'Category': [-1, 0, 1, 2],'Description': ['Anti: this tweet does not believe in man-made climate change', 'Neutral: this tweet neither supports nor refutes the belief of man-made climate change', 'Pro: this tweet supports the belief of man-made climate change', 'News: this tweet links to factual news about climate change']}))
 		st.markdown("Enter your opinion on climate change below, then choose what model you would like to use to classify your opinion.")
