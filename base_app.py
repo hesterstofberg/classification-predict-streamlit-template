@@ -40,13 +40,6 @@ stop_words = set(stopwords.words("english"))
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import words
 
-# Add colors
-def local_css(file_name):
-	with open(file_name) as f:
-		st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
-local_css("style.css")
-
 # Load your raw data
 raw = pd.read_csv("resources/train.csv")
 
