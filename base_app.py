@@ -34,11 +34,11 @@ news_hashtags = Image.open('resources/imgs/news_hashtags.png')
 pro_hashtags = Image.open('resources/imgs/pro_hashtags.png')
 wordcloud = Image.open('resources/imgs/joint_cloud.png')
 wordcount = Image.open('resources/imgs/wordcount_bar.png')
-Anna = Image.open('resources/imgs/Anna.png')
+Anna = Image.open('resources/imgs/Anna3.png')
 Hester = Image.open('resources/imgs/Hester.png')
 Maddy = Image.open('resources/imgs/Maddy.png')
-Olwethu = Image.open('resources/imgs/Olwethu.jpg')
-Tony = Image.open('resources/imgs/Tony.jpg')
+Olwethu = Image.open('resources/imgs/Olwethu.png')
+Tony = Image.open('resources/imgs/Tony2.png')
 
 # Data dependencies
 import pandas as pd
@@ -250,8 +250,10 @@ def main():
 		st.markdown("Meet the team")
 		st.markdown("We are six students at EXPLORE Data Science Academy, nice to meet you!")
 		st.info("Anna Modjadji")
+		st.image(Anna)
 		st.markdown("Book worm and music enthusiast with tiny sparks of mischief")
-		st.markdown("Buhle Ntushelo")
+		st.info("Buhle Ntushelo")
+		st.markdown("insert words here")
 		st.info("Hester Stofberg")
 		st.image(Hester) 
 		st.markdown("Aspiring paint-by-numbers painter, plant enthusiast, and lover of all things feta.")
@@ -262,6 +264,7 @@ def main():
 		st.image(Olwethu)
 		st.markdown("Mindful individual who believes Peace is grown with a little bit more love")
 		st.info("Tony Masombuka")
+		st.image(Tony)
 		st.markdown("An explorer of mother nature who believes in the preservation of fauna and flora")
         
 # Required to let Streamlit instantiate our web app.  
