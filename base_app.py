@@ -27,6 +27,13 @@ import joblib,os
 
 # for displaying images
 from PIL import Image
+
+#images on home page
+sentiment_analysis = Image.open('resources/imgs/Sentiment-Analysis.png')
+climate = Image.open('resources/imgs/Climate Change.jpg')
+globe = Image.open('resources/imgs/globe.png')
+
+# images on EDA page
 unbalancedData = Image.open('resources/imgs/unbalanced.png')
 anti_hashtags = Image.open('resources/imgs/anti_hashtags.png')
 neutral_hashtags = Image.open('resources/imgs/neutral_hashtags.png')
@@ -39,6 +46,16 @@ Hester = Image.open('resources/imgs/Hester.png')
 Maddy = Image.open('resources/imgs/Maddy.png')
 Olwethu = Image.open('resources/imgs/Olwethu.png')
 Tony = Image.open('resources/imgs/Tony2.png')
+
+# images on predictions page
+classification = Image.open('resources/imgs/classification.jpg')
+pro_text = Image.open('resources/imgs/positive.png')
+anti_text = Image.open('resources/imgs/negative.png')
+neutral_text = Image.open('resources/imgs/neutral.png')
+news_text = Image.open('resources/imgs/news-emoji.png')
+
+# images on resources page 
+twitter = Image.open('resources/imgs/twitter.png')
 
 # Data dependencies
 import pandas as pd
@@ -100,24 +117,25 @@ def cleaning (text):
     
 	return text
 
-# creating dataframe for description of sentiments
-df = pd.DataFrame({'Category': [-1, 0, 1, 2],'Description': ['Anti: this tweet does not believe in man-made climate change', 'Neutral: this tweet neither supports nor refutes the belief of man-made climate change', 'Pro: this tweet supports the belief of man-made climate change', 'News: this tweet links to factual news about climate change']})
-
 # Function to give statement of prediction
 def statement(sentiment):
 	"""This function gives a statement according to the prediction made"""
 	# Statement for 'anti' text
 	if sentiment == -1:
-		st.markdown("The selected model has determined that this text does not believe in man-made climate change")
+		st.image(anti_text, caption='Does not believe in climate change.', width=250)
+		st.success("The selected model has determined that this text does not believe in man-made climate change")
 	# Statement for 'neutral' text      
 	if sentiment == 0:
-		st.markdown("The selected model has determined that this text neither supports nor refutes the belief of man-made climate change")
+		st.image(neutral_text, caption='Fence sitting.', width=250)
+		st.success("The selected model has determined that this text neither supports nor refutes the belief of man-made climate change")
 	# Statement for 'pro' text        
 	if sentiment == 1:
-		st.markdown("The selected model has determined that this text supports the belief of man-made climate change")
+		st.image(pro_text, caption='Does believe in climate change!', width=250)
+		st.success("The selected model has determined that this text supports the belief of man-made climate change")
 	# Statement for 'news' text        
 	if sentiment == 2:
-		st.markdown("The selected model has determined that this text links to factual news about climate change")
+		st.image(news_text, caption='Factual/news related.', width=250)
+		st.success("The selected model has determined that this text links to factual news about climate change")
         
 	return     
 
@@ -125,30 +143,31 @@ def statement(sentiment):
 def main():
 	"""Tweet Classifier App with Streamlit """
 
-	# Creates a main title and subheader on your page -
-	# these are static across all pages
-	st.title("Tweet Classifer")
-	st.subheader("Climate change tweet classification")
-
 	# Creating sidebar with selection box -
 	# you can create multiple pages this way
-	options = ["Home","How it works", "EDA", "Prediction", "Information", "About us"]
+	options = ["Home","How it works", "EDA", "Making Predictions", "Resources", "About us"]
 	st.sidebar.subheader("Navigation")
 	selection = st.sidebar.selectbox("Choose Option", options)
 
 	# Building the home page    
 	if selection == "Home":
-		st.markdown("Welcome!")
+		st.title("Classification Station")
+		st.subheader("Welcome!")
+		st.markdown("This web app aims to classifify text related to climate change.")        
+		st.image(sentiment_analysis, caption='', width=500)        
+		st.markdown("")
+		st.markdown("Many companies are built around lessening one’s environmental impact or carbon footprint. They offer products and services that are environmentally friendly and sustainable, in line with their values and ideals. They would like to determine how people perceive climate change and whether or not they believe it is a real threat. This would add to their market research efforts in gauging how their product/service may be received.")
+		st.image(climate, caption='Climate change is in our hands.', use_column_width=True)        
             
 	# Building out the 'Background' page
 	if selection == "How it works":
-		st.markdown("How it works")
-		st.markdown("This web app requires the user to input text (ideally a tweet relating to climate change), and will classify it according to whether or not they believe in climate change. You can have a look at word clouds and other general exloratory data analysis on the 'EDA' page, and make your predictions on the 'Prediction' page that you can navigate to in the sidebar. In the 'Information' page you will find information about the data source and a brief data description.")
+		st.title("How it works")
+		st.markdown("This web app requires the user to input text (ideally a tweet relating to climate change), and will classify it according to whether or not they believe in climate change. Have a look at word clouds and other general exloratory data analysis on the 'EDA' page, and make predictions on the 'Prediction' page that can be navigate to in the sidebar. In the 'Resources' page there is information about the data source and a brief data description.")
 		st.markdown("Maybe add some info on how model performance is evaluated? f1 scores and such")
         
 	# Building out the 'EDA' page   
 	if selection == "EDA":
-		st.markdown("Exploratory Data Analysis")   
+		st.title("Exploratory Data Analysis")   
 		st.markdown("Analysis of the training data is an important step in understanding the data. A variety of analysis has been done on the training data. Select an option for more information.")
 		# Building checkbox to give user options
 		if st.checkbox('Sentiment count analysis'):
@@ -172,28 +191,32 @@ def main():
             
 			if sentimentChoice == "Neutral":            
 				st.markdown("add description")
-				st.image(neutral_hashtags, caption='Most frequently used hashtags for tweets with a neutral sentiment.')            
+				st.image(neutral_hashtags, caption='Most frequently used hashtags for tweets with a neutral sentiment.', use_column_width=True)            
 				st.markdown("Give conclusions on graph")
             
 			if sentimentChoice == "Pro":            
 				st.markdown("add description")
-				st.image(pro_hashtags, caption='Most frequently used hashtags for tweets with a pro climate change sentiment.')
+				st.image(pro_hashtags, caption='Most frequently used hashtags for tweets with a pro climate change sentiment.', use_column_width=True)
 				st.markdown("Give conclusions on graph")
             
 			if sentimentChoice == "Factual/news":            
 				st.markdown("add description")  
-				st.image(news_hashtags, caption='Most frequently used hashtags for tweets with a factual/news sentiment.')
+				st.image(news_hashtags, caption='Most frequently used hashtags for tweets with a factual/news sentiment.', use_column_width=True)
 				st.markdown("Give conclusions on graph")    
             
 		if st.checkbox('Average length of each sentiment'):
 			st.markdown("add description")
 
 	# Building out the predication page
-	if selection == "Prediction":
-		st.markdown("Prediction with machine learning models")
-		st.markdown("A machine learning model is used to classify tweets about climate change according to three categories. The categories are described below.")
-		st.table(df)
-		st.markdown("Enter your opinion on climate change below, then choose what model you would like to use to classify your opinion.")
+	if selection == "Making Predictions":
+		st.title("Making prediction with machine learning models")
+		st.image(classification, width=400)
+		st.markdown("A machine learning model is used to classify tweets about climate change according to three categories. The three categories are represented by numerical values.")
+		st.markdown("-1: This text does not believe in man-made climate change")
+		st.markdown("0: This text neither supports nor refutes the belief of man-made climate change")
+		st.markdown("1: This text supports the belief of man-made climate change")
+		st.markdown("2: This text links to factual news about climate change")        
+		st.markdown("Enter some text on climate change below, then choose the desired model to classify the text.")
 		# Creating a text box for user input
 		tweet_text = st.text_area("What's your opinion on climate change?",'')
 
@@ -211,7 +234,6 @@ def main():
 			prediction = predictor.predict(tweet_text)
             
 			# When model has successfully run, will print prediction
-			st.success("Your opinion has been categorized by the model as: {}".format(prediction))
 			statement(prediction)
 			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")
             
@@ -221,7 +243,6 @@ def main():
 			prediction = predictor.predict(tweet_text)
             
 			# When model has successfully run, will print prediction
-			st.success("Your opinion has been categorized by the model as: {}".format(prediction))
 			statement(prediction)            
 			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")        
 
@@ -231,17 +252,15 @@ def main():
 			prediction = predictor.predict(tweet_text)
             
 			# When model has successfully run, will print prediction
-			st.success("Your opinion has been categorized by the model as: {}".format(prediction))
 			statement(prediction)            
 			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")
 
-	# Building out the "Raw data" page
-	if selection == "Information":
-		st.markdown("Data used for training the model")
-		# You can read a markdown file from supporting resources folder
-		st.markdown("Here you will find the raw data that was used to train the model, in order to make some predictions.")
-
-		st.subheader("Raw Twitter data and label")
+	# Building out the "Resources" page
+	if selection == "Resources":
+		st.title("Resources")
+		st.subheader("Raw data used for training the model")
+		st.markdown("Here you will find the raw twitter data that was used to train the model, in order to make some predictions.")
+		st.image(twitter, caption='The raw data was obtained from Twitter', width=200)
 		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
 			st.write(raw[['sentiment', 'message']]) # will write the df to the page            
             
