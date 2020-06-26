@@ -34,6 +34,7 @@ news_hashtags = Image.open('resources/imgs/news_hashtags.png')
 pro_hashtags = Image.open('resources/imgs/pro_hashtags.png')
 wordcloud = Image.open('resources/imgs/joint_cloud.png')
 wordcount = Image.open('resources/imgs/wordcount_bar.png')
+Hester = Image.open('resources/imgs/Hester.png')
 
 # Data dependencies
 import pandas as pd
@@ -244,9 +245,10 @@ def main():
 	if selection == "About us":
 		st.markdown("Meet the team")
 		st.markdown("We are six students at EXPLORE Data Science Academy, nice to meet you!")
-		st.markdown("Anna Modjadji")
+		st.info("Anna Modjadji")
 		st.markdown("Buhle Ntushelo")
-		st.markdown("Hester Stofberg") 
+		st.info("Hester Stofberg")
+		st.image(Hester) 
 		st.markdown("She's an aspiring paint-by-numbers painter, plant enthusiast, and lover of all thing feta.")
 		st.markdown("Maddy Muir")        
 		st.markdown("Olwethu Mkhuhlane")
