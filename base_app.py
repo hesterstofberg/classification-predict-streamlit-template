@@ -246,9 +246,12 @@ def main():
 		st.markdown("We are six students at EXPLORE Data Science Academy, nice to meet you!")
 		st.markdown("Anna Modjadji")
 		st.markdown("Buhle Ntushelo")
-		st.markdown("Hester Stofberg. She's an aspiring paint-by-numbers painter, plant enthusiast, and lover of all thing feta.")        
+		st.markdown("Hester Stofberg") 
+		st.markdown("She's an aspiring paint-by-numbers painter, plant enthusiast, and lover of all thing feta.")
+		st.markdown("Maddy Muir")        
 		st.markdown("Olwethu Mkhuhlane")
 		st.markdown("Tony Masombuka")
+		st.markdown("An explorer of mother nature who believes in the preservation of fauna and flora")
         
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
