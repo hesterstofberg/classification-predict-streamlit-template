@@ -41,11 +41,12 @@ news_hashtags = Image.open('resources/imgs/news_hashtags.png')
 pro_hashtags = Image.open('resources/imgs/pro_hashtags.png')
 wordcloud = Image.open('resources/imgs/joint_cloud.png')
 wordcount = Image.open('resources/imgs/wordcount_bar.png')
-Anna = Image.open('resources/imgs/Anna3.png')
-Hester = Image.open('resources/imgs/Hester.png')
-Maddy = Image.open('resources/imgs/Maddy.png')
-Olwethu = Image.open('resources/imgs/Olwethu.png')
-Tony = Image.open('resources/imgs/Tony2.png')
+Team2 = Image.open('resources/imgs/team2.png')
+Anna = Image.open('resources/imgs/Anna4.png')
+Hester = Image.open('resources/imgs/Hester2.png')
+Maddy = Image.open('resources/imgs/Maddy2.png')
+Olwethu = Image.open('resources/imgs/Olwethu2.png')
+Tony = Image.open('resources/imgs/Tony3.png')
 
 # images on predictions page
 classification = Image.open('resources/imgs/classification.jpg')
@@ -266,7 +267,7 @@ def main():
             
 	# Building the "About us" age            
 	if selection == "About us":
-		st.markdown("Meet the team")
+		st.image(Team2)
 		st.markdown("We are six students at EXPLORE Data Science Academy, nice to meet you!")
 		st.info("Anna Modjadji")
 		st.image(Anna)
