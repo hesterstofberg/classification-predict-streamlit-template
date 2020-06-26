@@ -41,12 +41,13 @@ news_hashtags = Image.open('resources/imgs/news_hashtags.png')
 pro_hashtags = Image.open('resources/imgs/pro_hashtags.png')
 wordcloud = Image.open('resources/imgs/joint_cloud.png')
 wordcount = Image.open('resources/imgs/wordcount_bar.png')
-Team2 = Image.open('resources/imgs/team2.png')
+banner = Image.open('resources/imgs/banner.jpg')
 Anna = Image.open('resources/imgs/Anna4.png')
 Hester = Image.open('resources/imgs/Hester2.png')
 Maddy = Image.open('resources/imgs/Maddy2.png')
 Olwethu = Image.open('resources/imgs/Olwethu2.png')
 Tony = Image.open('resources/imgs/Tony3.png')
+contact = Image.open('resources/imgs/contact.jpg')
 
 # images on predictions page
 classification = Image.open('resources/imgs/classification.jpg')
@@ -274,26 +275,28 @@ def main():
             
 	# Building the "About us" age            
 	if selection == "About us":
-		st.image(Team2)
+		st.image(banner, width=700)
 		st.markdown("We are six students at EXPLORE Data Science Academy, nice to meet you!")
 		st.info("Anna Modjadji")
-		st.image(Anna, width=400)
+		st.image(Anna, width=200)
 		st.markdown("Book worm and music enthusiast with tiny sparks of mischief")
 		st.info("Buhle Ntushelo")
 		st.markdown("insert words here")
 		st.info("Hester Stofberg")
-		st.image(Hester) 
+		st.image(Hester, width=250) 
 		st.markdown("Aspiring paint-by-numbers painter, plant enthusiast, and lover of all things feta.")
 		st.info("Maddy Muir")
-		st.image(Maddy) 
+		st.image(Maddy, width=250) 
 		st.markdown("Mad about all things that are related to Maths")       
 		st.info("Olwethu Mkhuhlane")
-		st.image(Olwethu)
+		st.image(Olwethu, width=250)
 		st.markdown("Mindful individual who believes Peace is grown with a little bit more love")
 		st.info("Tony Masombuka")
-		st.image(Tony, width=400)
+		st.image(Tony, width=250)
 		st.markdown("An explorer of mother nature who believes in the preservation of fauna and flora")
-        
+		st.image(contact, width=700)
+		st.markdown("insert team linkedin profiles")
+
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
 	main()
