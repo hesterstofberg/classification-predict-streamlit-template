@@ -250,9 +250,9 @@ def main():
 		st.info("Hester Stofberg")
 		st.image(Hester) 
 		st.markdown("She's an aspiring paint-by-numbers painter, plant enthusiast, and lover of all thing feta.")
-		st.markdown("Maddy Muir")        
-		st.markdown("Olwethu Mkhuhlane")
-		st.markdown("Tony Masombuka")
+		st.info("Maddy Muir")        
+		st.info("Olwethu Mkhuhlane")
+		st.info("Tony Masombuka")
 		st.markdown("An explorer of mother nature who believes in the preservation of fauna and flora")
         
 # Required to let Streamlit instantiate our web app.  
