@@ -34,7 +34,10 @@ news_hashtags = Image.open('resources/imgs/news_hashtags.png')
 pro_hashtags = Image.open('resources/imgs/pro_hashtags.png')
 wordcloud = Image.open('resources/imgs/joint_cloud.png')
 wordcount = Image.open('resources/imgs/wordcount_bar.png')
+Anna = Image.open('resources/imgs/Anna.png')
 Hester = Image.open('resources/imgs/Hester.png')
+Maddy = Image.open('resources/imgs/Maddy.png')
+Tony = Image.open('resources/imgs/Tony.jpg')
 
 # Data dependencies
 import pandas as pd
@@ -250,7 +253,8 @@ def main():
 		st.info("Hester Stofberg")
 		st.image(Hester) 
 		st.markdown("She's an aspiring paint-by-numbers painter, plant enthusiast, and lover of all thing feta.")
-		st.info("Maddy Muir")        
+		st.info("Maddy Muir")
+		st.image(Maddy)        
 		st.info("Olwethu Mkhuhlane")
 		st.info("Tony Masombuka")
 		st.markdown("An explorer of mother nature who believes in the preservation of fauna and flora")
