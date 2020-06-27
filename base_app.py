@@ -160,8 +160,8 @@ def main():
 
 	# Building the home page    
 	if selection == "Home":
-		st.title("Classification Station")
-		st.subheader("Welcome!")
+		st.title("Classification Station:tm:")
+		st.subheader("Welcome!:grin:")
 		st.markdown("This web app aims to classifify text related to climate change.")        
 		st.image(sentiment_analysis, caption='', width=500)        
 		st.markdown("")
@@ -189,29 +189,29 @@ def main():
 			st.markdown("add description")
 			st.image(wordcount, caption='Top 20 most frequently used words.', use_column_width=True)
 		if st.checkbox('Hashtags for each sentiment'):
+			st.markdown("See the most commonly used hashtags for tweets that:")            
         
         # Give user the choice of sentiment
-			sentimentChoice = st.radio("Choose a sentiment", ("Anti", "Neutral", "Pro", "Factual/news"))
+			sentimentChoice = st.radio("Choose and option", ("don't believe in man-made climate change", "neither supports nor refutes the belief of man-made", "do believe in man-made climate change", "are news related to climate change"))
             
-			if sentimentChoice == "Anti":
-				st.markdown("add description")
-				st.image(anti_hashtags, caption='Most frequently used hashtags for tweets with an anti climate change sentiment.')
-				st.markdown("Give conclusions on graph")
+			if sentimentChoice == "don't believe in man-made climate change":
+				st.image(anti_hashtags, caption='Most frequently used hashtags for tweets with negative sentiment.', use_column_width=True)
+				st.markdown("It's very interesting to see that the most used hashtag here is #MAGA, which stands for 'Make America Great Again'. This was the campaign slogan used in American politics that was popularized by Donald Trump in his successful 2016 presidential campaign. This is not surprising since #trump is also frequently used for this sentiment. This supports the assumption that people who don't believe in climate change tend to support President Trump, which would make sense since he is openly sceptic about the matter.")                
             
-			if sentimentChoice == "Neutral":            
-				st.markdown("add description")
+			if sentimentChoice == "neither supports nor refutes the belief of man-made":            
 				st.image(neutral_hashtags, caption='Most frequently used hashtags for tweets with a neutral sentiment.', use_column_width=True)            
-				st.markdown("Give conclusions on graph")
+				st.markdown("It's interesting to see that #trump and #beforetheflood are two of the most frequently used hashtags. However, #trump is more commonly used than #beforetheflood. #trump is prevelant in the negative sentiment and #beforetheflood is prevelant in the positive sentiment. This might allude to people leaning towards the sceptical side of the matter, just like President Trump.")
             
-			if sentimentChoice == "Pro":            
-				st.markdown("add description")
-				st.image(pro_hashtags, caption='Most frequently used hashtags for tweets with a pro climate change sentiment.', use_column_width=True)
-				st.markdown("Give conclusions on graph")
+			if sentimentChoice == "do believe in man-made climate change":            
+				st.image(pro_hashtags, caption='Most frequently used hashtags for tweets with positive sentiment.', use_column_width=True)
+				st.markdown("The second most used hashtag is #beforetheflood, which refers to the documentary where actor Leonardo DiCaprio meets with scientists, activists and world leaders to discuss the dangers of climate change and possible solutions. This documentary was well received by the publc, with the majority of its audience most likely being people who believe in climate change. This assumption is supported by the fact that this hashtag was frequently used with this sentiment.")                
+				st.markdown("It is interesting to notice that the positive sentiment has #cop22 and #parisagreement. This might indicate that those who believe in climate change are interested and invested in how climate change is addressed politically and internationally.") 
+				st.markdown("#cop22 refers to the international political response to climate change began at the Rio Earth Summit in 1992, where the ‘Rio Convention’ included the adoption of the UN Framework on Climate Change (UNFCCC). This convention set out a framework for action aimed avoiding 'dangerous anthropogenic interference with the climate system'. The UNFCCC entered into force in 1994 and now has a near-universal membership of 196 countries. The main objective of the annual Conference of Parties (COP) is to review the Convention’s implementation.")
+				st.markdown("#parisagreement refers to an agreement within the United Nations Framework Convention on Climate Change, dealing with greenhouse-gas-emissions mitigation, adaptation, and finance, signed in 2016.")
             
-			if sentimentChoice == "Factual/news":            
-				st.markdown("add description")  
+			if sentimentChoice == "are news related to climate change":              
 				st.image(news_hashtags, caption='Most frequently used hashtags for tweets with a factual/news sentiment.', use_column_width=True)
-				st.markdown("Give conclusions on graph")    
+				st.markdown("")    
             
 		if st.checkbox('Average length of each sentiment'):
 			st.markdown("add description")
@@ -268,7 +268,7 @@ def main():
 	if selection == "Resources":
 		st.title("Resources")
 		st.subheader("Raw data used for training the model")
-		st.markdown("Here you will find the raw twitter data that was used to train the model, in order to make some predictions.")
+		st.markdown("Here you will find the raw twitter data that was used to train the model::.")
 		st.image(twitter, caption='The raw data was obtained from Twitter', width=200)
 		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
 			st.write(raw[['sentiment', 'message']]) # will write the df to the page            
@@ -284,8 +284,8 @@ def main():
 		st.markdown("insert words here")
 		st.info("Hester Stofberg")
 		st.image(Hester, width=250) 
-		st.markdown("Aspiring paint-by-numbers painter, plant enthusiast, and lover of all things feta.")
-		st.info("Maddy Muir")
+		st.markdown("Aspiring paint-by-numbers painter, plant enthusiast, and lover of all things feta.")        
+		st.info("Maddy octoMuir")
 		st.image(Maddy, width=250) 
 		st.markdown("Mad about all things that are related to Maths")       
 		st.info("Olwethu Mkhuhlane")
