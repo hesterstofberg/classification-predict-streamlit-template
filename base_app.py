@@ -295,7 +295,7 @@ def main():
 		st.image(contact, width=700)
 		st.markdown("     ")
 		st.info("Anna Modjadji")
-		st.markdown("LinkedIn: xxx ")
+		st.markdown("LinkedIn: https://www.linkedin.com/in/anna-modjadji-30b410136")
 		st.markdown("Github: https://github.com/AnnaM-Explore ")
 		st.info("Buhle Ntushelo")
 		st.markdown("LinkedIn: xxx ")
