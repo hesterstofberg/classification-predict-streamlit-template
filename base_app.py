@@ -33,6 +33,9 @@ sentiment_analysis = Image.open('resources/imgs/Sentiment-Analysis.png')
 climate = Image.open('resources/imgs/Climate Change.jpg')
 globe = Image.open('resources/imgs/globe.png')
 
+# images on how it works page
+How_it_works = Image.open('resources/imgs/How.png')
+
 # images on EDA page
 unbalancedData = Image.open('resources/imgs/unbalanced.png')
 anti_hashtags = Image.open('resources/imgs/anti_hashtags.png')
@@ -167,7 +170,24 @@ def main():
 	# Building out the 'How it works' page
 	if selection == "How it works":
 		st.title("How it works")
-		st.markdown("This web app requires the user to input text (ideally a tweet relating to climate change), and will classify it according to whether or not they believe in climate change. Have a look at word clouds and other general exloratory data analysis on the 'EDA' page, and make predictions on the 'Prediction' page that can be navigate to in the sidebar. In the 'Resources' page there is information about the data source and a brief data description.")
+		st.image(How_it_works, caption='', width=350)        
+		st.markdown("")
+		st.markdown("This web app aims to classifify text related to climate change.")
+		st.subheader("Navigation Bar")
+		st.markdown("Home Screen  - Landing page, gives brief discription of the App")
+		st.markdown("How it works - Explains how the app works, from navigating on pages, to how efficient the model used is.")
+		st.markdown("EDA          - Exploratory data analysis shows how we analysing the tweets data sets to summarize their main characteristics, using visuals. EDA is basically for displaying what the data can tell us beyond the formal modeling.")
+##		image of the navigation bar
+		st.markdown("Making Predictions - This is where the magic happens. This is the part where a tweet can be typed in and be classified based on the models we created. User aslo has option on which model they want to use for classification. This page also shows the accuracy score of the model used. This is a reflection of efficiency of the used model.")
+		st.markdown("Resources - This page show the raw tweeter data used for training the model.")
+		st.markdown("About Us -  Displays team infor, including contact detail.")
+		st.subheader("Using App (in a nutshell)")
+		st.markdown("App requires the user to input text (ideally a tweet relating to climate change), and will classify it according to whether or not they believe in climate change.")
+		st.markdown("")
+		st.markdown("Have a look at word clouds and other general exloratory data analysis on the 'EDA' page, and make predictions on the 'Prediction' page that can be navigated to in the sidebar.")
+		st.markdown("In the 'Resources' page there is information about the data source and a brief data description.")
+		st.subheader("Model Performance Evaluation")
+		st.markdown("Model evaluation aims to estimate the generalization accuracy of a model on future (unseen) data. Methods for evaluating a model's performance use a test set (i.e data not seen by the model) to evaluate model performance. This evaluation shows total efficiency as scores.")
 		st.markdown("Maybe add some info on how model performance is evaluated? f1 scores and such")
         
 	# Building out the 'EDA' page   

@@ -2,3 +2,13 @@ body {
     color: rgb(3, 2, 22);
     background-color: #c6d5f0;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+}
