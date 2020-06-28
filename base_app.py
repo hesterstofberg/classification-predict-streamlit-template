@@ -163,7 +163,7 @@ def main():
 		st.subheader("Welcome!:grin:")
 		st.markdown("This web app aims to classifify text related to climate change.")        
 		st.image(sentiment_analysis, caption='', width=500)        
-		st.markdown("")
+		st.subheader("Why climate change?")
 		st.markdown("Many companies are built around lessening one’s environmental impact or carbon footprint. They offer products and services that are environmentally friendly and sustainable, in line with their values and ideals. They would like to determine how people perceive climate change and whether or not they believe it is a real threat. This would add to their market research efforts in gauging how their product/service may be received.")
 		st.image(climate, caption='Climate change is in our hands.', use_column_width=True)        
             
@@ -171,8 +171,6 @@ def main():
 	if selection == "How it works":
 		st.title("How it works")
 		st.image(How_it_works, caption='', width=350)        
-		st.markdown("")
-		st.markdown("This web app aims to classifify text related to climate change.")
 		st.subheader("Navigation Bar")
 		st.markdown("Home Screen  - Landing page, gives brief discription of the App")
 		st.markdown("How it works - Explains how the app works, from navigating on pages, to how efficient the model used is.")
@@ -188,22 +186,12 @@ def main():
 		st.markdown("In the 'Resources' page there is information about the data source and a brief data description.")
 		st.subheader("Model Performance Evaluation")
 		st.markdown("Model evaluation aims to estimate the generalization accuracy of a model on future (unseen) data. Methods for evaluating a model's performance use a test set (i.e data not seen by the model) to evaluate model performance. This evaluation shows total efficiency as scores.")
-		st.markdown("Maybe add some info on how model performance is evaluated? f1 scores and such")
         
 	# Building out the 'EDA' page   
 	if selection == "EDA":
 		st.title("Exploratory Data Analysis")   
 		st.markdown("Analysis of the training data is an important step in understanding the data. A variety of analysis has been done on the training data. Select an option for more information.")
 		# Building checkbox to give user options
-		if st.checkbox('Sentiment count analysis'):
-			st.markdown("The sentiment count for the training data is shown below")
-			st.image(unbalancedData, caption='The training data is not evenly balanced.')
-		if st.checkbox('Word count analysis'):
-			st.markdown("Below you will see the wordclouds for each sentiment.")        
-			st.image(wordcloud, caption='Wordcloud from the training data.', use_column_width=True)
-		if st.checkbox('Word frequency analysis'):
-			st.markdown("add description")
-			st.image(wordcount, caption='Top 20 most frequently used words.', use_column_width=True)
 		if st.checkbox('Hashtags for each sentiment'):
 			st.markdown("See the most commonly used hashtags for tweets that:")            
         
@@ -229,8 +217,12 @@ def main():
 				st.image(news_hashtags, caption='Most frequently used hashtags for tweets with a factual/news sentiment.', use_column_width=True)
 				st.markdown("")    
             
-		if st.checkbox('Average length of each sentiment'):
-			st.markdown("add description")
+		if st.checkbox('Sentiment count analysis'):
+			st.markdown("The sentiment count for the training data is shown below")
+			st.image(unbalancedData, caption='The training data is not evenly balanced.')
+		if st.checkbox('Word count analysis'):
+			st.markdown("Below you will see the wordclouds for each sentiment.")        
+			st.image(wordcloud, caption='Wordcloud from the training data.', use_column_width=True)            
 
 	# Building out the prediction page
 	if selection == "Making Predictions":
@@ -284,7 +276,7 @@ def main():
 	if selection == "Resources":
 		st.title("Resources")
 		st.subheader("Raw data used for training the model")
-		st.markdown("Here you will find the raw twitter data that was used to train the model::.")
+		st.markdown("Here you will find the raw twitter data that was used to train the model.")
 		st.image(twitter, caption='The raw data was obtained from Twitter', width=200)
 		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
 			st.write(raw[['sentiment', 'message']]) # will write the df to the page            
@@ -319,10 +311,9 @@ def main():
 		st.markdown("LinkedIn: https://www.linkedin.com/in/anna-modjadji-30b410136")
 		st.info("Buhle Ntushelo")
 		st.markdown("Github: https://github.com/bntushelo ")
-		st.markdown("LinkedIn: xxx ")
 		st.info("Hester Stofberg")
-		st.markdown("Github: xxx ")
-		st.markdown("LinkedIn: xxx ")				
+		st.markdown("Github: https://github.com/hesterstofberg ")
+		st.markdown("LinkedIn: https://www.linkedin.com/in/hesterstofberg/ ")
 		st.info("Maddy Muir")
 		st.markdown("Github: https://github.com/Maddy-Muir ")
 		st.markdown("LinkedIn: https://www.linkedin.com/in/maddy-muir-41504743/ ")
