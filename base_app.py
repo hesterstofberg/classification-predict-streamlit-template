@@ -35,12 +35,12 @@ globe = Image.open('resources/imgs/globe.png')
 
 # images on how it works page
 How_it_works = Image.open('resources/imgs/How.png')
-Home_Page = Image.open('resources/imgs/Home.png')
-How_to_Page = Image.open('resources/imgs/How2.png')
-EDA_Page = Image.open('resources/imgs/EDA.png')
-Predictions_Page = Image.open('resources/imgs/Prediction.png')
-Resources_Page = Image.open('resources/imgs/Resources.png')
-About_Page = Image.open('resources/imgs/About.png')
+Home_Page = Image.open('resources/imgs/Home.PNG')
+How_to_Page = Image.open('resources/imgs/How2.PNG')
+EDA_Page = Image.open('resources/imgs/EDA.PNG')
+Predictions_Page = Image.open('resources/imgs/Prediction.PNG')
+Resources_Page = Image.open('resources/imgs/Resources.PNG')
+About_Page = Image.open('resources/imgs/About.PNG')
 
 # images on EDA page
 unbalancedData = Image.open('resources/imgs/unbalanced.png')
@@ -258,7 +258,7 @@ def main():
 
 		if modelChoice == 'Linear SVC':
 			# Loading .pkl file with the model of choice + make predictions
-			predictor = joblib.load(open(os.path.join("resources/LN_SVC_model.pkl"),"rb"))
+			predictor = joblib.load(open(os.path.join("resources/Final Models/LinearSVC.pkl"),"rb"))
 			prediction = predictor.predict(tweet_text)
             
 			# When model has successfully run, will print prediction
@@ -267,7 +267,7 @@ def main():
             
 		if modelChoice == 'Logistic':
 			# Loading .pkl file with the model of choice + make predictions
-			predictor = joblib.load(open(os.path.join("resources/LR_model.pkl"),"rb"))
+			predictor = joblib.load(open(os.path.join("resources/Final Models/LogisticRegression.pkl"),"rb"))
 			prediction = predictor.predict(tweet_text)
             
 			# When model has successfully run, will print prediction
@@ -276,7 +276,7 @@ def main():
 
 		if modelChoice == 'Naive Bayes':            
 			# Loading .pkl file with the model of choice + make predictions
-			predictor = joblib.load(open(os.path.join("resources/NB_model.pkl"),"rb"))
+			predictor = joblib.load(open(os.path.join("resources/Final Models/ComplementNB.pkl"),"rb"))
 			prediction = predictor.predict(tweet_text)
             
 			# When model has successfully run, will print prediction
