@@ -44,10 +44,10 @@ About_Page = Image.open('resources/imgs/About.PNG')
 
 # images on EDA page
 unbalancedData = Image.open('resources/imgs/unbalanced.png')
-anti_hashtags = Image.open('resources/imgs/anti_hashtags.png')
+anti_hashtags = Image.open('resources/imgs/negative_hashtags.png')
 neutral_hashtags = Image.open('resources/imgs/neutral_hashtags.png')
 news_hashtags = Image.open('resources/imgs/news_hashtags.png')
-pro_hashtags = Image.open('resources/imgs/pro_hashtags.png')
+pro_hashtags = Image.open('resources/imgs/positive_hashtags.png')
 wordcloud = Image.open('resources/imgs/joint_cloud.png')
 wordcount = Image.open('resources/imgs/wordcount_bar.png')
 
@@ -226,11 +226,17 @@ def main():
             
 			if sentimentChoice == "are news related to climate change":              
 				st.image(news_hashtags, caption='Most frequently used hashtags for tweets with a factual/news sentiment.', use_column_width=True)
-				st.markdown("")    
+				st.markdown("The fact that there are tweets that give the latest news or research related to climate change, shows that the public is aware of climate change and that there is scientific evidence that climate change is real and happening.")    
             
 		if st.checkbox('Sentiment count analysis'):
-			st.markdown("The sentiment count for the training data is shown below")
+			st.markdown("The four sentiment categories are numerically represented in the raw data.")
+			st.markdown("-1: **Negative** (anti climate change)")
+			st.markdown("0: **Neutral**")
+			st.markdown("1: **Positive** (pro climate change)")
+			st.markdown("2: **News** related")            
+			st.markdown("The sentiment count for the training data is shown below.")
 			st.image(unbalancedData, caption='The training data is not evenly balanced.')
+			st.markdown("Unbalanced data can lead to the model being overtrained or undertrained, giving incorrect predictions. ")            
 		if st.checkbox('Word count analysis'):
 			st.markdown("Below you will see the wordclouds for each sentiment.")        
 			st.image(wordcloud, caption='Wordcloud from the training data.', use_column_width=True)            
@@ -263,7 +269,7 @@ def main():
             
 			# When model has successfully run, will print prediction
 			statement(prediction)
-			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")
+			st.markdown("This model had a f1-accuracy score of 79% and an execution time of 1.11 seconds.")
             
 		if modelChoice == 'Logistic':
 			# Loading .pkl file with the model of choice + make predictions
@@ -272,7 +278,7 @@ def main():
             
 			# When model has successfully run, will print prediction
 			statement(prediction)            
-			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")        
+			st.markdown("This model had a f1-accuracy score of 77% and an execution time of 8.82 seconds.")        
 
 		if modelChoice == 'Naive Bayes':            
 			# Loading .pkl file with the model of choice + make predictions
@@ -281,7 +287,7 @@ def main():
             
 			# When model has successfully run, will print prediction
 			statement(prediction)            
-			st.markdown("This model had the best prediction blah blah blah, maybe add the f1 scores?")
+			st.markdown("This model had a f1-accuracy score of 73% and an execution time of 0.70 seconds.")
 
 	# Building out the "Resources" page
 	if selection == "Resources":
@@ -289,6 +295,11 @@ def main():
 		st.subheader("Raw data used for training the model")
 		st.markdown("Here you will find the raw twitter data that was used to train the model.")
 		st.image(twitter, caption='The raw data was obtained from Twitter', width=200)
+		st.markdown("The four categories are numerically represented in the raw data.")
+		st.markdown("-1: Negative (anti climate change)")
+		st.markdown("0: Neutral")
+		st.markdown("1: Positive (pro climate change)")
+		st.markdown("2: News related")        
 		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
 			st.write(raw[['sentiment', 'message']]) # will write the df to the page            
             
