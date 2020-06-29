@@ -48,8 +48,7 @@ anti_hashtags = Image.open('resources/imgs/negative_hashtags.png')
 neutral_hashtags = Image.open('resources/imgs/neutral_hashtags.png')
 news_hashtags = Image.open('resources/imgs/news_hashtags.png')
 pro_hashtags = Image.open('resources/imgs/positive_hashtags.png')
-wordcloud = Image.open('resources/imgs/joint_cloud.png')
-wordcount = Image.open('resources/imgs/wordcount_bar.png')
+wordcloud = Image.open('resources/imgs/joint_cloud(2).png')
 
 # images on predictions page
 classification = Image.open('resources/imgs/classification.jpg')
@@ -95,7 +94,7 @@ raw = pd.read_csv("resources/train.csv")
 
 # Functions for cleaning text
 def clean_tweets(message):
-	""" We need a docstring here"""
+	""" This function removes punctions and url's from the message"""
     
 	#change all words into lower case
 	message = message.lower()
@@ -117,7 +116,7 @@ def clean_tweets(message):
 
 # Function for cleaning text
 def cleaning (text):
-	""" We need a docstring here"""
+	"""this function lemmatizes the message"""
     
 	text = re.sub(r'[^\w\s]','',text, re.UNICODE)
 	text = text.lower()
@@ -235,11 +234,14 @@ def main():
 			st.markdown("1: **Positive** (pro climate change)")
 			st.markdown("2: **News** related")            
 			st.markdown("The sentiment count for the training data is shown below.")
-			st.image(unbalancedData, caption='The training data is not evenly balanced.')
-			st.markdown("Unbalanced data can lead to the model being overtrained or undertrained, giving incorrect predictions. ")            
+			st.image(unbalancedData, caption='The training data is not evenly balanced.', use_column_width=True)
+			st.markdown("It is clear that the positive sentiment is the majority with over 50% if the training data fallin gin this category. Unbalanced data can lead to the model being overtrained or undertrained, giving incorrect predictions.")
+			st.markdown("A total of 1965 tweets are duplicated, which is over 10% of the given data. The majority of the tweets belong to the positive sentiment category, with the most popular tweet being retweeted 306 times.")            
 		if st.checkbox('Word count analysis'):
-			st.markdown("Below you will see the wordclouds for each sentiment.")        
-			st.image(wordcloud, caption='Wordcloud from the training data.', use_column_width=True)            
+			st.markdown("Creating a word cloud to visualizate tweet keywords and text data,to highlight popular or trending terms based on frequency of use and prominence. The larger the word in the visual the more common the word is on tweet messages.")        
+			st.image(wordcloud, caption='Wordclouds from the training data.', use_column_width=True)
+			st.markdown("The following common words have been exluded from the wordcloud to get a better understanding of each sentiment: climate, change, RT, global, warming.")
+			st.markdown("Valuable information can be gathered from these wordlouds as the words clearly display the sentiment. As an example, the negative sentiment contains words like fake, hoax, and scam.")            
 
 	# Building out the prediction page
 	if selection == "Making Predictions":
@@ -260,7 +262,7 @@ def main():
 		tweet_text = [tweet_text]
         
         # Give user the choice of more than one model
-		modelChoice = st.radio("Choose a model", ("Linear SVC", "Logistic", "Naive Bayes"))         
+		modelChoice = st.radio("Choose a model", ("Linear SVC", "Logistic", "Ridge Classifier"))         
 
 		if modelChoice == 'Linear SVC':
 			# Loading .pkl file with the model of choice + make predictions
@@ -280,14 +282,14 @@ def main():
 			statement(prediction)            
 			st.markdown("This model had a f1-accuracy score of 77% and an execution time of 8.82 seconds.")        
 
-		if modelChoice == 'Naive Bayes':            
+		if modelChoice == 'Ridge Classifier':            
 			# Loading .pkl file with the model of choice + make predictions
-			predictor = joblib.load(open(os.path.join("resources/Final Models/ComplementNB.pkl"),"rb"))
+			predictor = joblib.load(open(os.path.join("resources/Final Models/RidgeClassifier.pkl"),"rb"))
 			prediction = predictor.predict(tweet_text)
             
 			# When model has successfully run, will print prediction
 			statement(prediction)            
-			st.markdown("This model had a f1-accuracy score of 73% and an execution time of 0.70 seconds.")
+			st.markdown("This model had a f1-accuracy score of 78% and an execution time of 1.24 seconds.")
 
 	# Building out the "Resources" page
 	if selection == "Resources":
@@ -344,7 +346,7 @@ def main():
 		st.markdown("LinkedIn: https://www.linkedin.com/mwlite/in/olwethu-mkhuhlane-9a1388113 ")
 		st.info("Tony Masombuka")
 		st.markdown("Github: https://github.com/TonyMasombuka ")
-		st.markdown("LinkedIn: xxx ")
+		st.markdown("LinkedIn: https://www.linkedin.com/in/daniel-masombuka-28547b106/ ")
 
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
