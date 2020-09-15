@@ -36,6 +36,6 @@
 
 You should also be automatically directed to the base page of your web app. This should look something like:
 
-![Streamlit base page](resources/imgs/streamlit-base-splash-screen.png)
+![Streamlit base page](resources/imgs/screen.png)
 
 You can now interact with the web app, enjoy!
